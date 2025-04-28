@@ -2,6 +2,7 @@ from typing import Union
 from pydantic import BaseModel
 
 class User(BaseModel):
+    id: str
     username: str
     email: Union[str, None] = None
     full_name: Union[str, None] = None
@@ -12,13 +13,12 @@ class UserForm(User):
     password:str
 
 class UserRead(User):
-    id: str
     hashed_password: str
 
 class Token(BaseModel):
     access_token: str
     token_type: str
-    user:UserRead
+    user:User
 
 
 class TokenData(BaseModel):

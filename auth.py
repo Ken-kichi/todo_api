@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from typing import Union
 import jwt
-from models import UserRead
+from models import UserRead,User
 from db_manager import DatabaseManager
 from connect_db import ConnectDB
 
@@ -30,7 +30,7 @@ class Auth:
 
         return user
 
-    def authenticate_user(self, email: str, password: str) -> Union[UserRead, bool]:
+    def authenticate_user(self, email: str, password: str) -> Union[User, bool]:
         user = self.get_user(email=email)
 
         if not user:
