@@ -28,12 +28,10 @@ class Task(BaseModel):
     user_id: str
     title: str
     description: str | None = None
-
-
-class TaskRead(Task):
-    id: str
     completed: bool
 
+class TaskRead(Task):
+    id:str
 class Message(BaseModel):
     message: str
 

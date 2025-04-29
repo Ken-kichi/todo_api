@@ -69,7 +69,7 @@ async def create_task(form_data: Task, current_user: User = Depends(get_current_
 
 # edit_task
 @router.put("/{id}", response_model=Message)
-async def update_task(id, form_data: TaskRead, current_user: User = Depends(get_current_active_user)):
+async def update_task(id, form_data: Task, current_user: User = Depends(get_current_active_user)):
     try:
         connect_db = ConnectDB()
         conn = connect_db.get_connection()

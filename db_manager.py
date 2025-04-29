@@ -192,14 +192,13 @@ class DatabaseManager:
         return user
 
     # update
-    def update_user_record(self, conn, user_id, username, full_name, email, hashed_password, is_manager):
+    def update_user_record(self, conn, user_id, username, full_name, email, is_manager):
         updated_time = datetime.now(pytz.timezone(
             'Asia/Tokyo')).strftime("%Y-%m-%d %H:%M:%S.%f")
         cursor = conn.cursor()
         cursor.execute(
-            "UPDATE users SET username = %s,full_name=%s,email=%s,hashed_password = %s ,is_manager = %s,updated_at = %s WHERE id = %s;",
-            (username, full_name, email, hashed_password,
-             is_manager, updated_time, user_id)
+            "UPDATE users SET username = %s,full_name=%s,email=%s,is_manager = %s,updated_at = %s WHERE id = %s;",
+            (username, full_name, email, is_manager, updated_time, user_id)
         )
 
         conn.commit()

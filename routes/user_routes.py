@@ -103,7 +103,7 @@ async def create_user(form_data:UserForm,current_user: User = Depends(get_curren
 
 # edit_user
 @router.put("/{user_id}", response_model=Message)
-async def update_user(user_id,form_data:UserForm,current_user: User = Depends(get_current_active_user)):
+async def update_user(user_id,form_data:User,current_user: User = Depends(get_current_active_user)):
     try:
         connect_db = ConnectDB()
         conn = connect_db.get_connection()
@@ -115,7 +115,6 @@ async def update_user(user_id,form_data:UserForm,current_user: User = Depends(ge
             username=form_data.username,
             full_name=form_data.full_name,
             email=form_data.email,
-            hashed_password=auth.get_password_hash(form_data.password),
             is_manager=form_data.is_manager
         )
         return message
