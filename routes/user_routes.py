@@ -115,7 +115,8 @@ async def update_user(user_id,form_data:User,current_user: User = Depends(get_cu
             username=form_data.username,
             full_name=form_data.full_name,
             email=form_data.email,
-            is_manager=form_data.is_manager
+            is_manager=form_data.is_manager,
+            disabled=form_data.disabled
         )
         return message
 
