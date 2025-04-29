@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends,HTTPException
 from auth import Auth
-from models import User,UserForm
+from models import User,UserAddForm,UserReadAll
 from typing import List
 from models import Message
 from connect_db import ConnectDB
@@ -39,7 +39,7 @@ auth = Auth(
 )
 
 # all_user
-@router.get("/",response_model=List[User])
+@router.get("/",response_model=List[UserReadAll])
 async def all_users(current_user: User = Depends(get_current_active_user)):
 
     connect_db = ConnectDB()
@@ -78,7 +78,7 @@ async def user(user_id,current_user: User = Depends(get_current_active_user)):
 # add_user
 # async def create_user(form_data:UserForm):
 @router.post("/", response_model=Message)
-async def create_user(form_data:UserForm,current_user: User = Depends(get_current_active_user)):
+async def create_user(form_data:UserAddForm,current_user: User = Depends(get_current_active_user)):
     try:
         connect_db = ConnectDB()
         conn = connect_db.get_connection()

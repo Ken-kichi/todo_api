@@ -2,17 +2,20 @@ from typing import Union
 from pydantic import BaseModel
 
 class User(BaseModel):
-    id: str
     username: str
     email: Union[str, None] = None
     full_name: Union[str, None] = None
     is_manager: Union[bool, None] = None
     disabled: Union[bool, None] = None
 
-class UserForm(User):
+class UserAddForm(User):
     password:str
 
+class UserReadAll(User):
+    id:str
+
 class UserRead(User):
+    id:str
     hashed_password: str
 
 class Token(BaseModel):

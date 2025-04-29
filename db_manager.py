@@ -1,7 +1,7 @@
 import pytz
 from datetime import datetime
 from typing import Union
-from models import UserRead, Message, TaskRead,User
+from models import UserRead, Message, TaskRead,UserReadAll
 
 
 class DatabaseManager:
@@ -128,7 +128,7 @@ class DatabaseManager:
         return Message(message="User is created")
 
     # read_all
-    def read_all_user_record(self, conn)->Union[User,bool]:
+    def read_all_user_record(self, conn)->Union[UserReadAll,bool]:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users;")
         rows = cursor.fetchall()
@@ -138,7 +138,7 @@ class DatabaseManager:
             return False
 
         users = [
-            User(
+            UserReadAll(
                 id=str(row[0]),
                 username=row[1],
                 full_name=row[2],
@@ -150,15 +150,15 @@ class DatabaseManager:
         return users
 
     # read_by_id
-    def read_user_record_by_id(self, conn, user_id: int) -> Union[User,bool]:
+    def read_user_record_by_id(self, conn, user_id: str) -> Union[UserReadAll,bool]:
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE id = %s", user_id)
+        cursor.execute("SELECT * FROM users WHERE id = %s", (str(user_id),))
         row = cursor.fetchall()
 
         if not row:
             return False
 
-        user = User(
+        user = UserReadAll(
             id=str(row[0][0]),
             username=row[0][1],
             full_name=row[0][2],
