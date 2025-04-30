@@ -133,7 +133,7 @@ async def delete_user(user_id,current_user: User = Depends(get_current_active_us
         connect_db = ConnectDB()
         conn = connect_db.get_connection()
         db_manager = DatabaseManager()
-        message = db_manager.delete_user_recode(
+        message = db_manager.delete_user_record(
             conn=conn,
             id=user_id,
         )

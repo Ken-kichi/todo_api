@@ -34,7 +34,7 @@ class DatabaseManager:
         conn.commit()
 
         if not rows:
-            False
+            return False
 
         tasks = [
             TaskRead(
@@ -205,7 +205,7 @@ class DatabaseManager:
         return Message(message="User is updated")
 
     # delete
-    def delete_user_recode(self, conn, id):
+    def delete_user_record(self, conn, id):
         cursor = conn.cursor()
         cursor.execute("DELETE FROM users WHERE id = %s", (id,))
 
